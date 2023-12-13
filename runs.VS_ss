@@ -1,0 +1,16 @@
+# look at conditions to get stick slip on a fault w/ velocity strengthening friction
+#Usage: nrsfs op_file law v_init v2 hold_time op_inc_hold op_inc_disp max_disp k a b1 Dc1 b2 dc2 -svtdm 
+#-m = do multiple velocity steps, for each step list velocity and time duration 
+#	 If you use multiple options m has to be last option.
+#	 If you want a ramp make v < 0 and give the ramp duration
+#	 The velocity v2 is ignored for this option
+#	 You can do a hold. Your velocity sequence will be used for the reload after the hold
+
+echo "hold_time, del_mu, v_init, v_rl, del_mu_min, mu_peak, mu_max, theta_hold, theta_peak, v_peak, a, b1, dc1, b2, dc2, k, file, law, lp_disp_peak, slip(peak-eo_hold), slip_at_end_hold, maxSlipvelocity"
+nrsfs run1 r 10 10 10000 1 0.1 600 1e-4 0.01 0.008 10 1 -10 -t -v -m 10 100 0 10000 10 100
+nrsfs run2 r 10 10 10000 1 0.1 600 2e-4 0.01 0.008 10 1 -10 -t -v -m 10 60 0 10000 10 60
+nrsfs run3 r 10 10 10000 1 0.1 600 2e-4 0.01 0.008 5 1 -10 -t -v -m 10 60 0 10000 10 60
+nrsfs run4 d 10 10 10000 1 0.1 600 1e-4 0.01 0.008 10 1 -10 -t -v -m 10 100 0 10000 10 100
+nrsfs run5 d 10 10 10000 1 0.1 600 2e-4 0.01 0.008 10 1 -10 -t -v -m 10 60 0 10000 10 60
+nrsfs run6 d 10 10 10000 1 0.1 600 2e-4 0.01 0.008 5 1 -10 -t -v -m 10 60 0 10000 10 60
+
